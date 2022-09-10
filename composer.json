@@ -1,0 +1,32 @@
+{
+  "name": "kuxitech/ddddocr",
+  "description": "ddddocr for PHP",
+  "license": "MIT",
+  "keywords": [
+    "ocr",
+    "captcha"
+  ],
+  "authors": [
+    {
+      "name": "sml2h3",
+      "email": "sml2h3@gmail.com"
+    },
+    {
+      "name": "ashawkey",
+      "email": "ashawkey1999@gmail.com"
+    },
+    {
+      "name": "kuxitech",
+      "email": "admin@kuxi.tech"
+    }
+  ],
+  "require": {
+    "php": "^8.0",
+    "ext-gd": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Ddddocr\\": "src/"
+    }
+  }
+}
