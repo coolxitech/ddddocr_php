@@ -25,9 +25,10 @@ class Captcha
      */
     public static function file(string $filename)
     {
+        if(!self::isLinux()) throw new \Exception('Non Linux systems are not supported.');
         if(!self::hasExec()) throw new \Exception('Please open function Exec.');
         if(!self::hasPython()) throw new \Exception('Please install Python3.7 or higher.');
-        if(!self::isLinux()) throw new \Exception('Non Linux systems are not supported.');
+        if(!self::hasddddocr()) throw new \Exception('Please install ddddocr in Python.');
         if(!file_exists($filename)) throw new \Exception('File not found.');
         $file = fopen($filename,'r');
         $image = fread($file,filesize($filename));
@@ -48,10 +49,11 @@ class Captcha
      */
     public static function base64(string $base64_string)
     {
+        if(!self::isLinux()) throw new \Exception('Non Linux systems are not supported.');
         if(!self::hasExec()) throw new \Exception('Please open function Exec.');
         if(!self::hasPython()) throw new \Exception('Please install Python3.7 or higher.');
-        if(!self::isLinux()) throw new \Exception('Non Linux systems are not supported.');
         if(base64_decode($base64_string) === false) throw new \Exception('Invalid Base64 string.');
+        if(!self::hasddddocr()) throw new \Exception('Please install ddddocr in Python.');
         if(!imagecreatefromstring(base64_decode($base64_string))) throw new \Exception('Invalid image');
         //create temp file
         $temp_file = tempnam(sys_get_temp_dir(), '');
