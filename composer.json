@@ -21,11 +21,12 @@
     }
   ],
   "require": {
-    "php": "^7.0"
+    "php": "^8.0",
+    "ext-gd": "*"
   },
   "autoload": {
     "psr-4": {
-      "Ddddocr_php\\ddddocr\\": "src/"
+      "Ddddocr\\": "src/"
     }
   }
 }
