@@ -26,14 +26,13 @@ class Captcha
     public static function file(string $filename)
     {
         if(!self::hasExec()) throw new \Exception('Please open function Exec.');
-        if(!self::hasPython()) throw new \Exception('Please install Python3.');
-        if(!self::hasPip3()) throw new \Exception('Please install pip3.');
+        if(!self::hasPython()) throw new \Exception('Please install Python3.7 or higher.');
         if(!self::isLinux()) throw new \Exception('Non Linux systems are not supported.');
-        if(!file_exists($filename)) throw new \Exception('File not found');
+        if(!file_exists($filename)) throw new \Exception('File not found.');
         $file = fopen($filename,'r');
         $image = fread($file,filesize($filename));
         $base64_string = base64_encode($image);
-        if(!imagecreatefromstring($image)) throw new \Exception('Invalid image');
+        if(!imagecreatefromstring($image)) throw new \Exception('Invalid image.');
         $temp_file = tempnam(sys_get_temp_dir(), '');
         $handle = fopen($temp_file, "w");
         $script = "import ddddocr\rimport base64\rimport json\rimg = base64.b64decode('$base64_string')\rocr = ddddocr.DdddOcr()\rprint(ocr.classification(img))";
@@ -50,10 +49,9 @@ class Captcha
     public static function base64(string $base64_string)
     {
         if(!self::hasExec()) throw new \Exception('Please open function Exec.');
-        if(!self::hasPython()) throw new \Exception('Please install Python3.');
-        if(!self::hasPip3()) throw new \Exception('Please install pip3.');
+        if(!self::hasPython()) throw new \Exception('Please install Python3.7 or higher.');
         if(!self::isLinux()) throw new \Exception('Non Linux systems are not supported.');
-        if(base64_decode($base64_string) === false) throw new \Exception('Invalid Base64 string');
+        if(base64_decode($base64_string) === false) throw new \Exception('Invalid Base64 string.');
         if(!imagecreatefromstring(base64_decode($base64_string))) throw new \Exception('Invalid image');
         //create temp file
         $temp_file = tempnam(sys_get_temp_dir(), '');
@@ -71,11 +69,6 @@ class Captcha
         preg_match_all('/\d+/',$python_version,$matches);
         if($matches[0][0] == '3' and (int)$matches[0][1] >= 7) return true;
         return false;
-    }
-
-    private static function hasPip3(){
-        $python_version = exec('pip3 -V');
-        return (bool)str_contains($python_version, 'python 3');
     }
 
     private static function hasExec(){
